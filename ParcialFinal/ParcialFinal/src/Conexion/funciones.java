@@ -35,7 +35,7 @@ public class funciones {
             
             while(rs.next()){
                 usuario.setUsername(rs.getString("usuario"));
-                usuario.setPassword(rs.getString("contrasena"));
+                //usuario.setPassword(rs.getString("contrasena"));
                 usuario.setId(rs.getInt("id_usuario"));
                 
                 
@@ -112,9 +112,9 @@ public class funciones {
         
         String query = " select u.usuario as Nombre ,r.puntaje_1 as Primer_Tiro ,r.puntaje_2 as Segundo_Tiro,r.puntaje_3 as Tercer_Tiro, (r.puntaje_1 + r.puntaje_2 + r.puntaje_3) as PuntajeTotal\n" +
                        " from usuario u, ronda r\n" +
-                       " group by u.usuario, r.puntaje_1, r.puntaje_2, r.puntaje_3, u.id_usuario\n" +
+                       " group by u.usuario, r.puntaje_1, r.puntaje_2, r.puntaje_3, u.id_usuario, r.id_usuario\n" +
                        " having u.id_usuario=?\n" +
-                       " ";
+                       " and r.id_usuario= u.id_usuario";
         try{
             PreparedStatement pstm = conn.prepareStatement(query);
             pstm.setInt(1, su.getId());
