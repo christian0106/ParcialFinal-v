@@ -76,6 +76,35 @@ public class funciones {
         return isSuccess;
     }
 
+    public boolean crearRonda(int id_usuario, int t1, int t2, int t3) throws SQLException{
+        //System.out.println("llega0");
+        Connection conn = bd.getConnection();
+        boolean isSuccess = false;
+        String query = "INSERT INTO ronda (id_usuario,puntaje_1,puntaje_2 ,puntaje_3) VALUES (?,?,?,?)";
+        String query2 = "SELECT * FROM ronda WHERE id_usuario= ?";
+        try{
+            PreparedStatement pstm = conn.prepareStatement(query);
+            PreparedStatement pstm2 = conn.prepareStatement(query2);
+            pstm.setInt(1, id_usuario);
+            pstm.setInt(2,t1);
+            pstm.setInt(3,t2);
+            pstm.setInt(4,t3);
+            
+            
+            pstm2.setInt(1,id_usuario);
+            if(true){
+                System.out.println("llega");
+                pstm.execute();
+                isSuccess = true;
+            }
+            //conn.close();
+        }catch(SQLException ex){
+            isSuccess = false;
+            ex.printStackTrace();
+        }
+        return isSuccess;
+    }
+    
     /*public List<Cuenta> getCuentas(Usuario su, int cat){
         Connection conn = bd.getConnection();
         List<Cuenta> cuentas = new ArrayList();
@@ -106,6 +135,7 @@ public class funciones {
         }
         return cuentas;
     }*/
+    
 
     
 }

@@ -15,7 +15,7 @@ import javax.swing.JFrame;
  * @author hugo
  */
 public class InicioSesion extends javax.swing.JFrame {
-funciones userDao;
+    funciones userDao;
     JFrame window;
     /**
      * Creates new form InicioSesion
@@ -154,13 +154,8 @@ funciones userDao;
         try{
             Usuario user = userDao.iniciarS(jTextField1.getText().toUpperCase(), new String(jPasswordField1.getPassword()));
             if(user !=null){
-                //System.out.println(user.getUsername()+user.getId());
-                /*Movimientos moves = new Movimientos(user);
-                setVisible(false);
-                moves.setVisible(true);*/
-                //System.out.println("iniciado: "+user.getUsername());
-                
-                
+                Opciones op = new Opciones(user);
+                op.setVisible(true);
             }else{
                 lblValidator.setVisible(true);
             }
