@@ -18,7 +18,7 @@ public class Conexion {//definimos el driver del motor que vamos a utilizar
     //usuario de la base de datos
     private final String USERNAME = "postgres";    
     // contraseña de la base de datos
-    private final String PASSWORD = "ethernanobull"; 
+    private final String PASSWORD = "PSWD"; 
     
     private Connection connection;
 
