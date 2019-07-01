@@ -5,17 +5,24 @@
  */
 package views;
 
+import Conexion.funciones;
+import java.sql.SQLException;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author hugo
  */
 public class CrearCuenta extends javax.swing.JFrame {
-
+    funciones userDao;
+    JFrame window;
     /**
      * Creates new form CrearCuenta
      */
     public CrearCuenta() {
         initComponents();
+        userDao = new funciones();
         setLocationRelativeTo(null);
     }
 
@@ -115,7 +122,20 @@ public class CrearCuenta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+    if(jTextField1.getText().isEmpty() || jPasswordField1.getPassword().equals("")){
+            JOptionPane.showMessageDialog(this,"Fields can not be empty","Alert",JOptionPane.WARNING_MESSAGE);
+        }else{
+            try{
+                if(userDao.crearCuenta(jTextField1.getText().toUpperCase(),new String(jPasswordField1.getPassword()))){
+                    JOptionPane.showMessageDialog(this,"User created successfully","Success",JOptionPane.INFORMATION_MESSAGE);
+                    
+                }else{
+                    JOptionPane.showMessageDialog(this,"Something is wrong please try again","Error",JOptionPane.ERROR_MESSAGE);
+                }
+            }catch(SQLException ex){
+                ex.printStackTrace();
+            }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed

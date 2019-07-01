@@ -14,7 +14,7 @@ import java.sql.SQLException;
 public class Conexion {//definimos el driver del motor que vamos a utilizar
     private final String DRIVER = "org.postgresql.Driver";  
     //Cadena de conexión
-    private final String URL = "jdbc:postgresql://localhost:5432/poo";  
+    private final String URL = "jdbc:postgresql://localhost:5432/parcial";  
     //usuario de la base de datos
     private final String USERNAME = "postgres";    
     // contraseña de la base de datos

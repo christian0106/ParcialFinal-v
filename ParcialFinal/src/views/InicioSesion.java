@@ -5,18 +5,25 @@
  */
 package views;
 
+import Conexion.funciones;
+import Entidades.Usuario;
+import java.sql.SQLException;
+import javax.swing.JFrame;
+
 /**
  *
  * @author hugo
  */
 public class InicioSesion extends javax.swing.JFrame {
-
+funciones userDao;
+    JFrame window;
     /**
      * Creates new form InicioSesion
      */
     public InicioSesion() {
         initComponents();
         setLocationRelativeTo(null);
+        userDao = new funciones();
         lblValidator.setVisible(false);
     }
 
@@ -142,7 +149,26 @@ public class InicioSesion extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //this.dispose();
+        
+        
+        try{
+            Usuario user = userDao.iniciarS(jTextField1.getText().toUpperCase(), new String(jPasswordField1.getPassword()));
+            if(user !=null){
+                //System.out.println(user.getUsername()+user.getId());
+                /*Movimientos moves = new Movimientos(user);
+                setVisible(false);
+                moves.setVisible(true);*/
+                //System.out.println("iniciado: "+user.getUsername());
+                
+                
+            }else{
+                lblValidator.setVisible(true);
+            }
+        }catch(SQLException e){
+            lblValidator.setVisible(true);
+        }
+        
+    
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
