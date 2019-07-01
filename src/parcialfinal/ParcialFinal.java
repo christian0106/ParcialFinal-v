@@ -25,6 +25,8 @@ public class ParcialFinal {
         Menu men = new Menu();
         men.setTitle("Menu principal");
         men.setVisible(true);
+        
+        
         //Conexion con = new Conexion();
          try{
                 JFrame.setDefaultLookAndFeelDecorated(true);

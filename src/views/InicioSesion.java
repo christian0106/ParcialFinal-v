@@ -5,9 +5,13 @@
  */
 package views;
 
+import Conexion.Registro;
 import Conexion.funciones;
 import Entidades.Usuario;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
@@ -173,12 +177,15 @@ public class InicioSesion extends javax.swing.JFrame {
             if(user !=null){
                 Opciones op = new Opciones(user);
                 op.setVisible(true);
+               // Registro r= new Registro();
+               //r.exportar(user);
             }else{
                 lblValidator.setVisible(true);
             }
         }catch(SQLException e){
             lblValidator.setVisible(true);
-        }
+        } 
+        
         
     
     }//GEN-LAST:event_jButton1ActionPerformed

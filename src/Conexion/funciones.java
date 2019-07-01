@@ -35,7 +35,7 @@ public class funciones {
             
             while(rs.next()){
                 usuario.setUsername(rs.getString("usuario"));
-                usuario.setPassword(rs.getString("contrasena"));
+                //usuario.setPassword(rs.getString("contrasena"));
                 usuario.setId(rs.getInt("id_usuario"));
                 
                 
@@ -105,36 +105,29 @@ public class funciones {
         return isSuccess;
     }
     
-    /*public List<Cuenta> getCuentas(Usuario su, int cat){
+    public ResultSet CrearInforme(Usuario su){
+
+        ResultSet resultado=null;
         Connection conn = bd.getConnection();
-        List<Cuenta> cuentas = new ArrayList();
-        String query = "SELECT cu.id_cuenta,cu.nombre, mov.monto, id_categoria, mov.fecha\n" +
-                       "FROM movimiento mov, usuario u, cuenta cu\n" +
-                       "WHERE mov.id_usuario=? and mov.id_categoria=?\n" +
-                       "order by mov.fecha,mov.id_cuenta desc\n" +
-                       "limit 5" ;
         
+        String query = " select u.usuario as Nombre ,r.puntaje_1 as Primer_Tiro ,r.puntaje_2 as Segundo_Tiro,r.puntaje_3 as Tercer_Tiro, (r.puntaje_1 + r.puntaje_2 + r.puntaje_3) as PuntajeTotal\n" +
+                       " from usuario u, ronda r\n" +
+                       " group by u.usuario, r.puntaje_1, r.puntaje_2, r.puntaje_3, u.id_usuario, r.id_usuario\n" +
+                       " having u.id_usuario=?\n" +
+                       " and r.id_usuario= u.id_usuario";
         try{
-            PreparedStatement stm = conn.prepareStatement(query);
-            stm.setInt(1, su.getId());
-            stm.setInt(2, cat);
+            PreparedStatement pstm = conn.prepareStatement(query);
+            pstm.setInt(1, su.getId());
+            resultado = pstm.executeQuery();
             
-            ResultSet rs = stm.executeQuery();
-            while(rs.next()){
-                Cuenta cu = new Cuenta();
-                cu.setId(rs.getInt("id_cuenta"));
-                cu.setName(rs.getString("nombre"));
-                cu.setTipo_cuenta(rs.getInt("id_categoria"));
-                cu.setMonto(rs.getInt("monto"));
-                cu.setE(rs.getDate("fecha"));
-                cuentas.add(cu);
-            }
+
             //conn.close();
         }catch(SQLException ex){
             ex.printStackTrace();
         }
-        return cuentas;
-    }*/
+
+        return resultado;
+    }
     
 
     
