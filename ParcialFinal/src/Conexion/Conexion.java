@@ -14,11 +14,11 @@ import java.sql.SQLException;
 public class Conexion {//definimos el driver del motor que vamos a utilizar
     private final String DRIVER = "org.postgresql.Driver";  
     //Cadena de conexión
-    private final String URL = "jdbc:postgresql://localhost:5432/ParcialFinal";  
+    private final String URL = "jdbc:postgresql://localhost:5432/parcial";  
     //usuario de la base de datos
     private final String USERNAME = "postgres";    
     // contraseña de la base de datos
-    private final String PASSWORD = "pene1224"; 
+    private final String PASSWORD = "ethernanobull"; 
     
     private Connection connection;
 
