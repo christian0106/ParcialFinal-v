@@ -128,6 +128,38 @@ public class funciones {
         return resultado;
     }
     
-
     
-}
+    public ArrayList datos(Usuario su){
+        ArrayList<Usuario> users =new ArrayList(); 
+        Connection conn = bd.getConnection();
+        String query = " select u.usuario as Nombre ,r.puntaje_1 as Primer_Tiro ,r.puntaje_2 as Segundo_Tiro,r.puntaje_3 as Tercer_Tiro, (r.puntaje_1 + r.puntaje_2 + r.puntaje_3) as PuntajeTotal\n" +
+                       " from usuario u, ronda r\n" +
+                       " group by u.usuario, r.puntaje_1, r.puntaje_2, r.puntaje_3, u.id_usuario, r.id_usuario\n" +
+                       " having u.id_usuario=?\n" +
+                       " and r.id_usuario= u.id_usuario";
+        try{
+            PreparedStatement stm = conn.prepareStatement(query);
+            stm.setInt(1, su.getId());
+            ResultSet rs = stm.executeQuery();
+            
+            while(rs.next()){
+                Usuario usuario = new Usuario();
+                usuario.setUsername(rs.getString("nombre"));
+                usuario.setP1(rs.getInt("Primer_Tiro"));
+                usuario.setP2(rs.getInt("Segundo_Tiro"));
+                usuario.setP3(rs.getInt("Tercer_Tiro"));
+                users.add(usuario);
+            }
+            //conn.close();
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return users;
+    }
+    
+        
+        
+        
+        
+    } 
+
